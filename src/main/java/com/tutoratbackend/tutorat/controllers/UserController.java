@@ -27,6 +27,11 @@ public class UserController {
     public List<Users> lister(){
         return userServiceImp.lister();
     }
+    //corbeille
+    @GetMapping("/listeCorbeille")
+    public List<Users> listeCorbeille(){
+        return userServiceImp.listeCorbeille();
+    }
     //rechercher par son id
     @GetMapping("/getById/{id}")
     public Users findById(@PathVariable("id") Long id){
@@ -37,9 +42,14 @@ public class UserController {
     public void supprimerUsers(@PathVariable("id") Long id){
         userServiceImp.supprimerUsers(id);
     }
+    //corbeille
+    @PutMapping("/recupere/{id}")
+    public  void recupere(@PathVariable("id") Long id){userServiceImp.recupere(id);}
 
     @PutMapping("/modify/{id}")
     public String modifier(@RequestBody Users users, @PathVariable Long id){
+        String randomCode = RandomString.make(14);
+        users.setPassword(randomCode);
         return userServiceImp.modifier(users, id);
     }
 

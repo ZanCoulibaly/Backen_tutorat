@@ -10,4 +10,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<Users, Long> {
     @Query("SELECT p FROM Users p WHERE p.etat='ACTIVER'")
     public List<Users> lister();
+
+    @Query("SELECT p FROM Users p WHERE p.etat='DESACTIVER'")
+    public List<Users> listeCorbeille();
 }

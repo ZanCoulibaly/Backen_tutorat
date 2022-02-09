@@ -28,6 +28,11 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public List<Users> listeCorbeille() {
+        return userRepository.listeCorbeille();
+    }
+
+    @Override
     public Users findByIdUsers(Long id) {
         Users users = userRepository.findById(id).orElseThrow();
         if (users.getEtat()==Etat.ACTIVER){
@@ -44,6 +49,13 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public void recupere(Long id) {
+        Users users = userRepository.findById(id).get();
+        users.setEtat(Etat.ACTIVER);
+        userRepository.save(users);
+    }
+
+    @Override
     public String modifier(Users users, Long id) {
         Users modifier = userRepository.findById(id).get();
 
@@ -51,6 +63,7 @@ public class UserServiceImp implements UserService {
         modifier.setPrenom(users.getPrenom());
         modifier.setAddresse(users.getAddresse());
         modifier.setPassword(users.getPassword());
+        modifier.setEmail(users.getEmail());
         userRepository.save(modifier);
         return "votre coordonné a été modifier avec succès";
     }
