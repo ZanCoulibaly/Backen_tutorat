@@ -27,4 +27,20 @@ public class UserController {
     public List<Users> lister(){
         return userServiceImp.lister();
     }
+    //rechercher par son id
+    @GetMapping("/getById/{id}")
+    public Users findById(@PathVariable("id") Long id){
+        return userServiceImp.findByIdUsers(id);
+    }
+    //supprimer par son id
+    @PutMapping("/supprimer/{id}")
+    public void supprimerUsers(@PathVariable("id") Long id){
+        userServiceImp.supprimerUsers(id);
+    }
+
+    @PutMapping("/modify/{id}")
+    public String modifier(@RequestBody Users users, @PathVariable Long id){
+        return userServiceImp.modifier(users, id);
+    }
+
 }

@@ -23,6 +23,35 @@ public class UserServiceImp implements UserService {
     //affichier la liste des utilisateurs activer
     @Override
     public List<Users> lister() {
+
         return userRepository.lister();
+    }
+
+    @Override
+    public Users findByIdUsers(Long id) {
+        Users users = userRepository.findById(id).orElseThrow();
+        if (users.getEtat()==Etat.ACTIVER){
+            return users;
+        }
+        return null;
+    }
+
+    @Override
+    public void supprimerUsers(Long id) {
+        Users users = userRepository.findById(id).get();
+        users.setEtat(Etat.DESACTIVER);
+        userRepository.save(users);
+    }
+
+    @Override
+    public String modifier(Users users, Long id) {
+        Users modifier = userRepository.findById(id).get();
+
+        modifier.setNom(users.getNom());
+        modifier.setPrenom(users.getPrenom());
+        modifier.setAddresse(users.getAddresse());
+        modifier.setPassword(users.getPassword());
+        userRepository.save(modifier);
+        return "votre coordonné a été modifier avec succès";
     }
 }
