@@ -67,4 +67,9 @@ public class UserServiceImp implements UserService {
         userRepository.save(modifier);
         return "votre coordonné a été modifier avec succès";
     }
+
+    @Override
+    public List<Users> loginVerify(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, password);
+    }
 }

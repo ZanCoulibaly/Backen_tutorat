@@ -21,11 +21,7 @@ public class Users {
     private String prenom;
     private String email;
     private String password;
-    private String etablissement;
-    private String matieresEnseigner;
     private String addresse;
-    private String classeEnseigner;
-    private String matieresMaitrice;
 
 
     @Enumerated(EnumType.STRING)

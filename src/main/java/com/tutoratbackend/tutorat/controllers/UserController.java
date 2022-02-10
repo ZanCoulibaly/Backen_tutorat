@@ -17,8 +17,6 @@ public class UserController {
     //ajouter un utilisateur
     @PostMapping("/add")
     public String addUsers(@RequestBody Users users){
-        String randomCode = RandomString.make(14);
-        users.setPassword(randomCode);
         userServiceImp.addUsers(users);
         return "inscript avec succès";
     }
@@ -48,9 +46,13 @@ public class UserController {
 
     @PutMapping("/modify/{id}")
     public String modifier(@RequestBody Users users, @PathVariable Long id){
-        String randomCode = RandomString.make(14);
-        users.setPassword(randomCode);
+        //String randomCode = RandomString.make(14);
+        //users.setPassword(randomCode);
         return userServiceImp.modifier(users, id);
+    }
+    @GetMapping("/login/{email}&{password}")
+    public List<Users> Login(@PathVariable String email, @PathVariable String password){
+        return userServiceImp.loginVerify(email, password);
     }
 
 }
